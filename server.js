@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
+app.use(express.json());
+
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postsRoute = require("./routes/posts");
-const mongoose = require("mongoose");
-require("dotenv").config();
 
 // DB接続
 mongoose
@@ -14,14 +16,14 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-// API
-app.get("/", (req, res) => {
-  res.send("hello express");
-});
-
 // ミドルウェア(module化したAPI)
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
+
+// API
+app.get("/", (req, res) => {
+  res.send("hello express");
+});
 
 app.listen(3000, console.log("サーバーを開始します"));

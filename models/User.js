@@ -1,4 +1,3 @@
-const { default: mongoose } = require("mongoose");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
@@ -34,14 +33,24 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    followings: {
+      type: Array,
+      default: [],
+    },
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    desc: {
+      type: String,
+      max: 70,
     },
     city: {
       type: String,
       max: 50,
     },
   },
-  { timestamps: trues }
+  { timestamps: true }
 );
+
+module.exports = mongoose.model("User", UserSchema);
