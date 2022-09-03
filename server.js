@@ -7,6 +7,7 @@ app.use(express.json());
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postsRoute = require("./routes/posts");
+const uploadRoute = require("./routes/upload");
 
 // DB接続
 mongoose
@@ -20,10 +21,11 @@ mongoose
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
+app.use("/api/upload", uploadRoute);
 
 // API
 app.get("/", (req, res) => {
   res.send("hello express");
 });
 
-app.listen(3000, console.log("サーバーを開始します"));
+app.listen(4000, console.log("サーバーを開始します"));
